@@ -33,7 +33,9 @@ namespace Datos.Repositories
             return emailExists;
         }
 
-		public List<usuarios> ObtenerUsuarios()
+        
+
+        public List<usuarios> ObtenerUsuarios()
 		{
 			List<usuarios> products = new List<usuarios>();
 			try
@@ -68,6 +70,27 @@ namespace Datos.Repositories
 
         }
 
+        public usuarios ExisteUsuarioDNI(string dni)
+        {
+            usuarios usu = null;
+
+            try
+            {
+                using (var contexto = new equipo_c_dbEntities())
+                {
+                    usu = contexto.usuarios.Where(u => u.DNI == dni).FirstOrDefault();
+                }
+                return usu;
+            }
+            catch (Exception)
+            {
+                return usu;
+            }
+
+        }
+
+
+
         public void AltaUsuario(usuarios user)
         {
             try
@@ -77,7 +100,7 @@ namespace Datos.Repositories
 					contexto.usuarios.Add(user);
 					contexto.SaveChanges();
 				}
-			} catch (Exception e) { Console.WriteLine(" Error doing register"); }
+			} catch (Exception e) { Console.WriteLine(e.ToString()); }
         }
 
     }

@@ -68,7 +68,18 @@ namespace Negocio.Management
 
         }
 
-		public void AltaUsuario(UsuariosDTO usuDTO)
+        public UsuariosDTO ExisteUsuarioDNI(string dni)
+        {
+            usuarios usu = new Datos.Repositories.UsuariosRepositories().ExisteUsuarioDNI(dni);
+            UsuariosDTO usuDTO = null;
+
+            usuDTO = userToUserDTO(usu);
+
+            return usuDTO;
+
+        }
+
+        public void AltaUsuario(UsuariosDTO usuDTO)
 		{
 			usuarios user = new usuarios();
 			user.EMAIL = usuDTO.GMAIL;
